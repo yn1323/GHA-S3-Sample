@@ -20,8 +20,17 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run:
           aws s3 sync --delete --region ap-northeast-1 ./dist/ s3://gha-s3-sample/${{ github.sha }}/
-      - name: Show github properties
-        run: | 
-          echo ${{ github.workflow }}
-          echo ${{ github.ref }}
-          echo ${{ github.sha }}
+      - name: Create comments
+        run: |
+          cat << EOF > comments
+          1st
+          2nd
+          3rd
+          EOF
+
+      - name: Post comments
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          URL: ${{ github.event.pull_request.html_url }}
+        run:
+          gh pr comment -F ./comments "${URL}"
