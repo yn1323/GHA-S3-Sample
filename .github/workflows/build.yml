@@ -27,7 +27,7 @@ jobs:
         run:
           aws s3 sync --delete --region ap-northeast-1 ./dist/ s3://gha-s3-sample/${{ github.sha }}/
       # hash値をもとにコメント作成
-      # よしなにコメントの更新もしれくれる
+      # よしなにコメントの更新もしてくれる
       - name: Create comments
         uses: mshick/add-pr-comment@v2
         # URLがほぼ直打ちなのに注意
