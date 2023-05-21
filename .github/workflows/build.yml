@@ -21,7 +21,9 @@ jobs:
       #   run:
       #     aws s3 sync --delete --region ap-northeast-1 ./dist/ s3://gha-s3-sample/${{ github.sha }}/
       - name: Create comments
-        uses: JoseThen/comment-pr@v1.1.1
+        uses: mshick/add-pr-comment@v2
         with:
-          comment: 'This PR is the bees knees!'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          message: |
+            **Hello**
+            🌏
+            !
