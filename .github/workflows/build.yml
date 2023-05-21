@@ -27,19 +27,13 @@ jobs:
           2nd
           3rd
           EOF
-      - name: "Post Comment"
-        uses: actions/github-script@v3
-        env:
-          MESSAGE: |
-            テストコメント
-            SHA: ${{ github.sha }}
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v3
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: process.env.MESSAGE
-            })
+          issue-number: 1
+          body: |
+            This is a multi-line test comment
+            - With GitHub **Markdown** :sparkles:
+            - Created by [create-or-update-comment][1]
+          reactions: '+1'
   
