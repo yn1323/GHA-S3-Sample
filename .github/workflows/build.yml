@@ -7,9 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '18'
+      # - uses: actions/setup-node@v2
+      #   with:
+      #     node-version: '18'
       # - name: install dependencies
       #   run: npm ci
       # - name: build
@@ -21,19 +21,7 @@ jobs:
       #   run:
       #     aws s3 sync --delete --region ap-northeast-1 ./dist/ s3://gha-s3-sample/${{ github.sha }}/
       - name: Create comments
-        run: |
-          cat << EOF > comments
-          1st
-          2nd
-          3rd
-          EOF
-      - name: Create comment
-        uses: peter-evans/create-or-update-comment@v3
+        uses: JoseThen/comment-pr@v1.1.1
         with:
-          issue-number: 1
-          body: |
-            This is a multi-line test comment
-            - With GitHub **Markdown** :sparkles:
-            - Created by [create-or-update-comment][1]
-          reactions: '+1'
-  
+          comment: 'This PR is the bees knees!'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
