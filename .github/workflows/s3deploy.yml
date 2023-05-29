@@ -1,9 +1,9 @@
-name: s3deploy
+name: Cleanup on PR push
 
 on: [pull_request]
 
 jobs:
-  build2:
+  deploy:
     runs-on: ubuntu-latest
     env:
       AWS_REGION: ap-northeast-1
