@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # path
-      Path: ${{ github.repository_owner }}_${{ github.event.number }}
+      HOGEHOGE: ${{ github.repository_owner }}_${{ github.event.number }}
     # 権限許可
     permissions:
       pull-requests: write
@@ -29,7 +29,7 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: aws s3 sync --delete --region ap-northeast-1 ./dist/ s3://gha-s3-sample/${{ Path }}/
+        run: aws s3 sync --delete --region ap-northeast-1 ./dist/ s3://gha-s3-sample/${{ HOGEHOGE }}/
       # hash値をもとにコメント作成
       # よしなにコメントの更新もしてくれる
       - name: Create comments
