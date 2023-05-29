@@ -1,13 +1,13 @@
-name: build
+name: build2
 
 on: [pull_request]
 
 jobs:
-  build:
+  build2:
     runs-on: ubuntu-latest
     env:
       # path
-      HOGEHOGE: ${{ github.repository_owner }}_${{ github.event.number }}
+      Path: ${{ github.repository_owner }}_${{ github.event.number }}
     # 権限許可
     permissions:
       pull-requests: write
