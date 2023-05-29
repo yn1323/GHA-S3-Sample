@@ -1,4 +1,4 @@
-name: build2
+name: s3deploy
 
 on: [pull_request]
 
@@ -21,9 +21,6 @@ jobs:
         run: npm ci
       - name: build
         run: npm run build
-      - name: test
-        run: |
-          echo $Path
       # S3アップロード
       - name: Deploy to S3
         # S3アップロード用のユーザーを作成したもらうほうがベター
