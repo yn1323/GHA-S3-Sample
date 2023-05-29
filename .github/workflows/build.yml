@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # path
-      Path: ${{ $github.repository_owner }}_${{ github.event.number }}
+      Path: ${{ github.repository_owner }}_${{ github.event.number }}
     # 権限許可
     permissions:
       pull-requests: write
@@ -21,6 +21,8 @@ jobs:
         run: npm ci
       - name: build
         run: npm run build
+      - name: echo
+        run: echo $Path
       # S3アップロード
       - name: Deploy to S3
         # S3アップロード用のユーザーを作成したもらうほうがベター
