@@ -6,7 +6,7 @@ jobs:
   build2:
     runs-on: ubuntu-latest
     env:
-      AWS_REGION: "ap-northeast-1"
+      AWS_REGION: ap-northeast-1
       SUB_DIRECTORY: ${{ github.repository_owner }}_${{ github.event.number }}
     # 権限許可
     permissions:
