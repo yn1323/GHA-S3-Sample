@@ -6,7 +6,6 @@ on:
 jobs:
   cleanup:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
     env: 
       AWS_REGION: "ap-northeast-1"
       SUB_DIRECTORY: ${{ github.repository_owner }}_${{ github.event.number }}
