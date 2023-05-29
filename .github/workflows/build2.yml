@@ -31,7 +31,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          aws s3 sync --delete --region ap-northeast-1 ./dist/ s3://gha-s3-sample/${{ github.repository_owner }}_${{ github.event.number }}/
+          aws s3 sync --delete --region ap-northeast-1 ./dist/ s3://gha-s3-sample/$Path/
       # hash値をもとにコメント作成
       # よしなにコメントの更新もしてくれる
       - name: Create comments
@@ -40,4 +40,4 @@ jobs:
         with:
           message: |
             最新のDeploy先はこちら！🦈
-            "[https://gha-s3-sample.s3.ap-northeast-1.amazonaws.com/$Path/index.html](https://gha-s3-sample.s3.ap-northeast-1.amazonaws.com/$Path/index.html)"
+            [https://gha-s3-sample.s3.ap-northeast-1.amazonaws.com/$Path/index.html](https://gha-s3-sample.s3.ap-northeast-1.amazonaws.com/$Path/index.html)
