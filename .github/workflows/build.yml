@@ -1,10 +1,13 @@
-name: build
+name: build2
 
-on: [pull_request, pull_request_target]
+on: [pull_request]
 
 jobs:
-  build:
+  build2:
     runs-on: ubuntu-latest
+    env:
+      AWS_REGION: "ap-northeast-1"
+      SUB_DIRECTORY: ${{ github.repository_owner }}_${{ github.event.number }}
     # 権限許可
     permissions:
       pull-requests: write
@@ -18,14 +21,17 @@ jobs:
         run: npm ci
       - name: build
         run: npm run build
+      - name: test
+        run: |
+          echo $Path
       # S3アップロード
       - name: Deploy to S3
         # S3アップロード用のユーザーを作成したもらうほうがベター
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run:
-          aws s3 sync --delete --region ap-northeast-1 ./dist/ s3://gha-s3-sample/${{ github.sha }}/
+        run: |
+          aws s3 sync --delete --region $AWS_REGION ./dist/ s3://gha-s3-sample/${{ env.SUB_DIRECTORY }}/
       # hash値をもとにコメント作成
       # よしなにコメントの更新もしてくれる
       - name: Create comments
@@ -34,4 +40,4 @@ jobs:
         with:
           message: |
             最新のDeploy先はこちら！🦈
-            [https://gha-s3-sample.s3.ap-northeast-1.amazonaws.com/${{ github.sha }}/index.html](https://gha-s3-sample.s3.ap-northeast-1.amazonaws.com/${{ github.sha }}/index.html)
+            [https://gha-s3-sample.s3.ap-northeast-1.amazonaws.com/${{ env.SUB_DIRECTORY }}/index.html](https://gha-s3-sample.s3.ap-northeast-1.amazonaws.com/${{ env.SUB_DIRECTORY }}/index.html)
