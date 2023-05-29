@@ -1,4 +1,4 @@
-name: Cleanup on PR push
+name: Deploy on PR push
 
 on: [pull_request]
 
