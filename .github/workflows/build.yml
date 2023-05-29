@@ -22,14 +22,16 @@ jobs:
       - name: build
         run: npm run build
       - name: test
-        run: echo $Path
+        run: |
+          echo $Path
       # S3アップロード
       - name: Deploy to S3
         # S3アップロード用のユーザーを作成したもらうほうがベター
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: aws s3 sync --delete --region ap-northeast-1 ./dist/ s3://gha-s3-sample/${{ github.repository_owner }}_${{ github.event.number }}/
+        run: |
+          aws s3 sync --delete --region ap-northeast-1 ./dist/ s3://gha-s3-sample/${{ github.repository_owner }}_${{ github.event.number }}/
       # hash値をもとにコメント作成
       # よしなにコメントの更新もしてくれる
       - name: Create comments
