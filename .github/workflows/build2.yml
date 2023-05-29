@@ -40,4 +40,4 @@ jobs:
         with:
           message: |
             最新のDeploy先はこちら！🦈
-            "[https://gha-s3-sample.s3.ap-northeast-1.amazonaws.com/${{ Path }}/index.html](https://gha-s3-sample.s3.ap-northeast-1.amazonaws.com/${{ Path }}/index.html)"
+            "[https://gha-s3-sample.s3.ap-northeast-1.amazonaws.com/$Path/index.html](https://gha-s3-sample.s3.ap-northeast-1.amazonaws.com/$Path/index.html)"
