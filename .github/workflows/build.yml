@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # path
-      Path: ${{ $github.repository_owner }}_${{ github.event.number }}
+      Path: ${{ github.repository_owner }}_${{ github.event.number }}
     # 権限許可
     permissions:
       pull-requests: write
@@ -18,7 +18,11 @@ jobs:
         with:
           node-version: '18'
       - name: install dependencies
-        run: npm ci
+        run: | 
+          echo $Path
+          echo ${{ github.repository_owner }}
+          echo ${{ github.event.number }}
+          npm ci
       - name: build
         run: npm run build
       # S3アップロード
